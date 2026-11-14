@@ -61,8 +61,14 @@ test("missing usage, malformed data and invalid amounts stay unknown", () => {
 
 test("retains only the session cookie, accepts a full Cookie header and rejects header injection", () => {
   expect(i.sessionCookie(" Cookie: other=private; zed.session=test%2Fvalue; tracking=not-sent ")).toBe("zed.session=test%2Fvalue")
-  for (const bad of ["", "other=x", "zed.session=", "zed.session=a; zed.session=b", "zed.session=a\r\nX-Test: b", "zed.session=a\nb", 'zed.session="a"', "zed.session=a".repeat(2000)])
+  for (const bad of ["", "other=x", "zed.session=", "zed.session=a; zed.session=b", "zed.session=a\r\nX-Test: b", "zed.session=a\nb", "zed.session=a".repeat(2000)])
     expect(() => i.sessionCookie(bad)).toThrow()
+})
+
+test("accepts Zed's signed JSON session without changing its bytes", () => {
+  const cookie = 'zed.session=example-signature={"sid":"00000000-0000-4000-8000-000000000000"}'
+  expect(i.sessionCookie(cookie)).toBe(cookie)
+  expect(i.sessionCookie(`other=not-sent; ${cookie}; tracking=not-sent`)).toBe(cookie)
 })
 
 test("missing or invalid credentials make no request and expose no input", async () => {

@@ -1,6 +1,6 @@
 {
   "name": "magpie-zed-billing",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Zed web billing usage for Magpie: spent, spending limit and remaining USD budget",
   "type": "module",
   "main": "./opencode.mjs",
