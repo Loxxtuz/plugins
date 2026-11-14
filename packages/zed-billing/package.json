@@ -1,0 +1,17 @@
+{
+  "name": "magpie-zed-billing",
+  "version": "0.1.0",
+  "description": "Zed web billing usage for Magpie: spent, spending limit and remaining USD budget",
+  "type": "module",
+  "main": "./opencode.mjs",
+  "exports": "./opencode.mjs",
+  "files": ["index.mjs", "opencode.mjs", "README.md", "LICENSE"],
+  "scripts": { "test": "bun test" },
+  "keywords": ["magpie", "opencode-plugin", "zed", "usage", "billing"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Loxxtuz/plugins.git",
+    "directory": "packages/zed-billing"
+  }
+}

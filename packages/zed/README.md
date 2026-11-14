@@ -109,6 +109,11 @@ GitHub login.
 
 ## Usage
 
+For token spend, spending limit and remaining USD budget, this fork adds an
+optional [Zed Billing plugin](../zed-billing). It uses a separate browser
+billing session and displays its own account card, leaving this model
+provider and its editor sign-in unchanged.
+
 magpie's `auth.usage` hook shows what Zed tells its editor of the plan,
 as magpie's built-in Zed account did. Zed doesn't report how much of the
 allowance is spent, so there are no windows:
