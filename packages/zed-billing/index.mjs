@@ -16,7 +16,9 @@ function sessionCookie(input) {
     throw new Error("Paste the Cookie request header from a signed-in zed.dev page.")
   const header = input.trim().replace(/^Cookie:\s*/i, "")
   const values = header.split(";").map((v) => v.trim()).filter((v) => v.startsWith("zed.session="))
-  if (values.length !== 1 || !/^zed\.session=[\x21\x23-\x2b\x2d-\x3a\x3c-\x5b\x5d-\x7e]+$/.test(values[0]))
+  // Zed's signed session includes a JSON suffix. Preserve its quotes and
+  // punctuation; control characters and cookie delimiters stay forbidden.
+  if (values.length !== 1 || !/^zed\.session=[\x21-\x3a\x3c-\x7e]+$/.test(values[0]))
     throw new Error("The Cookie header must contain exactly one non-empty zed.session cookie.")
   return values[0]
 }
